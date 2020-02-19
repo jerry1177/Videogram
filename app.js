@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 
 // MySQL connection section
 
-//const con = mysql.createConnection({ host: "localhost", user: "yourusername", password: "yourpassword"});
-//con.connect(function(err) { if (err) throw err; console.log("Connected!"); });
+const con = mysql.createConnection({ host: process.env.DB_HOST, user: process.env.DB_USER, password: process.env.DB_PASSWORD});
+con.connect(function(err) { if (err) throw err; console.log("Connected!"); });
 
 
 app.get('/',(req, res)=>res.send('Hello World!'));
