@@ -2,6 +2,12 @@
 //  in any input file against the
 //  videogram database.
 
+// Some Setup
+require('dotenv').config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const mysql = require('mysql');
+
 // Get the input file.
 var File = process.argv[2];
 
@@ -14,17 +20,13 @@ var QueryArray = fs.readFileSync(File, 'utf8').split(";");
 console.log(QueryArray);
 
 // Connect to database
-const mysql = require('mysql');
-const con = mysql.createConnection({ host: process.env.DB_HOST, user: process.env.DB_USER, password: process.env.DB_PASSWORD});
-for (i = 0; i < QueryArray.length; i++)
-{
-    con.connect(function(err) {
-      if (err) throw err;
-      console.log("Connected!");
-      var sql = QueryArray[i];
-      con.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("Table altered");
-      });
-    });
-}
+HOST = "videogramdatabase.cecwmoteixfp.us-west-1.rds.amazonaws.com"
+USER = "admin"
+PASS = "softwareengineering"
+const con = mysql.createConnection({ host: HOST, user: USER, password: PASS });
+//for (i = 0; i < QueryArray.length; i++)
+//{
+con.connect(function(err) { if (err) throw err; console.log("Connected!"); });
+
+con.query(QueryArray[0], function (err, result) { if (err) throw err; console.log("Table altered"); });
+//}
