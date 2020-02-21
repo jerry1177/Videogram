@@ -16,16 +16,15 @@ console.log(QueryArray);
 // Connect to database
 const mysql = require('mysql');
 const con = mysql.createConnection({ host: process.env.DB_HOST, user: process.env.DB_USER, password: process.env.DB_PASSWORD});
-con.connect(function(err)
+for (i = 0; i < QueryArray.length; i++)
 {
-    for (i = 0; i < QueryArray.length; i++)
-    {
+    con.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
+      var sql = QueryArray[i];
+      con.query(sql, function (err, result) {
         if (err) throw err;
-        console.log("Connected!");
-        con.query(i, function (err, result)
-        {
-            if (err) throw err;
-            console.log("Success: " + result);
-        });
-    }
-});
+        console.log("Table altered");
+      });
+    });
+}
