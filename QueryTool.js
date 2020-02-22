@@ -14,19 +14,31 @@ var File = process.argv[2];
 // Read the query text into variable
 var readline = require('readline');
 var fs = require('fs');
-var QueryArray = fs.readFileSync(File, 'utf8').split(";");
+var QueryArray = fs.readFileSync(File, 'utf8');
 
 // Print the query text
 console.log(QueryArray);
+var arr = QueryArray.split(";");
+for (i = 0; i < arr.length; i++)
+{
+    console.log(i + ": " + arr[i]);
+}
 
 // Connect to database
 HOST = "videogramdatabase.cecwmoteixfp.us-west-1.rds.amazonaws.com"
 USER = "admin"
 PASS = "softwareengineering"
 const con = mysql.createConnection({ host: HOST, user: USER, password: PASS });
-//for (i = 0; i < QueryArray.length; i++)
-//{
-con.connect(function(err) { if (err) throw err; console.log("Connected!"); });
-
-con.query(QueryArray[0], function (err, result) { if (err) throw err; console.log("Table altered"); });
-//}
+for (i = 0; i < arr.length; i++)
+{
+     con.connect(function(err) {
+          if (err) console.log(err);
+          console.log("Connected!");
+          var sql = arr[i];
+          console.log("Query: " + sql)
+          con.query(sql, function (err, result) {
+            if (err) console.log(err);
+            console.log("Result: " + result);
+          });
+    });
+}
