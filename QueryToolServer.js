@@ -15,8 +15,8 @@ var File = process.argv[2];
 
 // Read the query text into variable
 var readline = require('readline');
-var fs = require('fs');
-var QueryArray = fs.readFileSync(File, 'utf8').replace(/\n/g, " ");
+//var fs = require('fs');
+//var QueryArray = fs.readFileSync(File, 'utf8').replace(/\n/g, " ");
 
 // Print the query text
 //console.log(QueryArray);
@@ -28,10 +28,10 @@ var QueryArray = fs.readFileSync(File, 'utf8').replace(/\n/g, " ");
 
 
 //app.get('/',(req, res)=>res.send('Hello World!'));
-app.get('/', function (req, res) {
-	   res.send('Hello World');
-	console.log("1 Connection");
-})
+//app.get('/', function (req, res) {
+//	   res.send('Hello World');
+//	console.log("1 Connection");
+//})
 //app.post('/',(req, res)=>res.send(`username = ${req.body.username} \n password = ${req.body.password}`));
 app.post('/', function (req, res) {
 		QUERY = req.body.Query;
