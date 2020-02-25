@@ -18,22 +18,49 @@ con.connect(function(err) { if (err) throw err; console.log("Connected!"); });
 
 //app.get('/',(req, res)=>res.send('Hello World!'));
 //app.post('/',(req, res)=>res.send(`username = ${req.body.username} \n password = ${req.body.password}`));
+const Connection = require('./MySQLConnection.js')
+var conn = new Connection.MySQLConnection("videogram");
 
 app.post('/query', (req, res)=>{
-		var QUERY = req.body.Query;
-		const Connection = require('./MySQLConnection.js')
-		var conn = new Connection.MySQLConnection("videogram");
-		conn.SubmitQuery(QUERY, function(RESULT) {
+		const query = req.body.Query;
+		conn.SubmitQuery(query, function(RESULT) {
 			const response = {message:"success", result: RESULT};
 			res.send(JSON.stringify(response));	
 		});
-})
+});
 
 app.post('/user/signup', (req, res)=>{
-	const query = `INSERT INTO Users (Username, Password, Firstname, Lastname, Email) VALUES (${req.body.username}, ${req.body.password}, ${req.body.firstname}, ${req.body.lastname}, ${req.body.email})`;
-	console.log("USER Signup Done here");
-	const success = {message:"success"};
-	res.send(JSON.stringify(success));	
+	const query = `INSERT INTO Users (Username, Password, Firstname, Lastname, Email) VALUES ("${req.body.Username}", "${req.body.Password}", "${req.body.Firstname}", "${req.body.Lastname}", "${req.body.Email}")`;
+	conn.SubmitQuery(query, function(RESULT) {
+		const response = {message:"success", result: RESULT};
+		res.send(JSON.stringify(response));	
+	});	
 });
+
+app.post('/user/login', (req, res)=>{
+	    const query = `SELECT Password FROM Users WHERE Username = "${req.body.Username}"`;
+	    conn.SubmitQuery(query, function(RESULT) {
+		    	if (RESULT.length) 
+			{
+				if (RESULT[0].Password == req.body.Password)
+				{
+		    			const response = {message:"success"};
+					res.send(JSON.stringify(response));
+				}
+		    		else
+				{
+					const response = {message:"failed", reason: "incorrect password"};
+					res.send(JSON.stringify(response));
+				}
+			}
+		    	else
+			{
+				const response = {message:"failed", reason: "incorrect username"};
+				res.send(JSON.stringify(response));
+			}
+        });
+});
+
+
 
 app.listen(process.env.PORT, ()=> console.log(`Example app listening on port ${process.env.PORT}!`));
