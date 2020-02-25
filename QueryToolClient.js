@@ -6,14 +6,13 @@ var QueryArray = fs.readFileSync("QueryInput.txt", 'utf8').replace(/\n/g, " ").s
 // Print the query text
 //console.log(QueryArray);
 //var arr = QueryArray.split(";");
-for (i = 0; i < (QueryArray.length - 1); i++)
-{
-    console.log(i + ": " + QueryArray[i]);
+
+    console.log("Query: " + QueryArray[0]);
 
 
 
         const data = JSON.stringify({
-          Query: QueryArray[i]
+          Query: QueryArray[0]
         })
 
         const options = {
@@ -38,6 +37,3 @@ for (i = 0; i < (QueryArray.length - 1); i++)
         })
         req.write(data)
         req.end()
-
-
-}

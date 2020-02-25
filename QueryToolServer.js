@@ -37,7 +37,7 @@ var fs = require('fs');
 //app.post('/',(req, res)=>res.send(`username = ${req.body.username} \n password = ${req.body.password}`));
 app.post('/', function (req, res) {
 		QUERY = req.body.Query;
-	  	const Connection = require('./Database.js')
+	  	const Connection = require('./MySQLConnection.js')
 		var conn = new Connection.MySQLConnection("videogram");
 		conn.SubmitQuery(QUERY, function(RESULT) {
 			console.log("Query Result: ");
