@@ -31,9 +31,14 @@ app.post('/query', (req, res)=>{
 
 app.post('/user/signup', (req, res)=>{
 	const query = `INSERT INTO Users (Username, Password, Firstname, Lastname, Email) VALUES ("${req.body.Username}", "${req.body.Password}", "${req.body.Firstname}", "${req.body.Lastname}", "${req.body.Email}")`;
-	conn.SubmitQuery(query, function(RESULT) {
+	conn.SubmitQuery(query, function(err, RESULT) {
+	if (err) {
+		const response = {message:"error", result:"invalid information sent"};
+		res.send(JSON.stringify(response));			
+	}else {
 		const response = {message:"success", result: RESULT};
-		res.send(JSON.stringify(response));	
+		res.send(JSON.stringify(response));
+		}
 	});	
 });
 
