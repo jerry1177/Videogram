@@ -4,6 +4,13 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const fs = require('fs');
+const AWS = require('aws-sdk');
+
+const s3 = new AWS.S3({
+	accessKeyId: process.env.S3_ACCESS_KEY_ID,
+	secretAccessKey: process.env.S3_SECRET_ACCESS_KEY
+});
 
 const app = express();
 
@@ -73,5 +80,30 @@ app.post('/user/login', (req, res)=>{
 });
 
 
+app.post('/user/upload/video', (req, res)=>{
+	
+});
 
 app.listen(process.env.PORT, ()=> console.log(`Example app listening on port ${process.env.PORT}!`));
+
+const uploadFile = (fileName, s3FileName) => {
+	// Read content from file
+	const fileContent = fs.readFileSync(fileName);
+
+	// Setting up S3 upload parameters
+	const params = {
+		Bucket: process.env.BUCKET_NAME,
+		Key: s3FileName, // File name you want to save as in S3 (i.e.): 'cat.jpg'
+		Body: fileContent
+	};
+
+	// Upload files to the bucket
+	s3.upload(params, function(err, data){
+		if(err) {
+			console.log(err);
+		}
+
+		console.log(`File uploaded successfully. ${data.Location}`);
+	});
+	
+}
