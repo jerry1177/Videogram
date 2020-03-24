@@ -81,29 +81,25 @@ app.post('/user/login', (req, res)=>{
 
 
 app.post('/user/upload/video', (req, res)=>{
-	
+	// make query to video link
+	console.log(req.body);
+	const query = `INSERT INTO Video_Media (Video_Link, User, Upload_Date, Active, Title, Description, Location, Length, Resolution, Fps, Format) VALUES ("${req.body.Video_Link}", "${req.body.User_Id}", "${req.body.Upload_Date}", "${req.body.Active}", "${req.body.Title}", "${req.body.Description}", "${req.body.Location}", "${req.body.Length}", "${req.body.Resolution}", "${req.body.Fps}", "${req.body.Format}")`;
+            conn.SubmitQuery(query, function(err, RESULT) {    
+		   /* if (err)
+                        {
+                        	 const response = {message:"failed", reason: "Failed to insert Video_Media"};
+                               res.send(JSON.stringify(response));
+
+                        }
+                        else
+                        {*/
+                             const response = {message:"success", result: RESULT};
+				res.send(JSON.stringify(response));
+                        //}
+        });
 });
+
+
 
 app.listen(process.env.PORT, ()=> console.log(`Example app listening on port ${process.env.PORT}!`));
 
-const uploadFile = (fileName, s3FileName) => {
-	// Read content from file
-	const fileContent = fs.readFileSync(fileName);
-
-	// Setting up S3 upload parameters
-	const params = {
-		Bucket: process.env.BUCKET_NAME,
-		Key: s3FileName, // File name you want to save as in S3 (i.e.): 'cat.jpg'
-		Body: fileContent
-	};
-
-	// Upload files to the bucket
-	s3.upload(params, function(err, data){
-		if(err) {
-			console.log(err);
-		}
-
-		console.log(`File uploaded successfully. ${data.Location}`);
-	});
-	
-}
