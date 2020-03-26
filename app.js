@@ -58,22 +58,22 @@ app.post('/user/signup', (req, res)=>{
 app.post('/user/login', (req, res)=>{
 	    const query = `SELECT Password FROM Users WHERE Username = "${req.body.Username}"`;
 	    conn.SubmitQuery(query, function(RESULT) {
-		    	if (RESULT.length) 
+		    if (RESULT.length)
 			{
 				if (RESULT[0].Password == req.body.Password)
 				{
 		    			const response = {message:"success"};
-					res.send(JSON.stringify(response));
+					    res.send(JSON.stringify(response));
 				}
-		    		else
+		    	else
 				{
-					const response = {message:"failed", reason: "incorrect password"};
+					const response = {message:"failed", result: "incorrect password"};
 					res.send(JSON.stringify(response));
 				}
 			}
 		    	else
 			{
-				const response = {message:"failed", reason: "incorrect username"};
+				const response = {message:"failed", result: "incorrect username"};
 				res.send(JSON.stringify(response));
 			}
         });
@@ -87,7 +87,7 @@ app.post('/user/upload/video', (req, res)=>{
             conn.SubmitQuery(query, function(err, RESULT) {    
 		   if (err)
                         {
-                        	 const response = {message:"failed", reason: "Failed to insert Video_Media"};
+                        	 const response = {message:"failed", result: "Failed to insert Video_Media"};
                               res.send(JSON.stringify(response));
 
                         }
@@ -106,9 +106,8 @@ app.post('/user/upload/photo', (req, res)=>{
             conn.SubmitQuery(query, function(err, RESULT) {
                     if (err)
                         {
-                               const response = {message:"failed", reason: "Failed to insert Photo_Media"};
+                               const response = {message:"failed", result: "Failed to insert Photo_Media"};
                                res.send(JSON.stringify(response));
-
                         }
                         else
                         {
