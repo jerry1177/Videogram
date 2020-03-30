@@ -85,19 +85,58 @@ app.post('/user/upload/video', (req, res)=>{
 	console.log(req.body);
 	const query = `INSERT INTO Video_Media (Video_Link, User, Upload_Date, Active, Title, Description, Location, Length, Resolution, Fps, Format) VALUES ("${req.body.Video_Link}", "${req.body.User_Id}", "${req.body.Upload_Date}", "${req.body.Active}", "${req.body.Title}", "${req.body.Description}", "${req.body.Location}", "${req.body.Length}", "${req.body.Resolution}", "${req.body.Fps}", "${req.body.Format}")`;
             conn.SubmitQuery(query, function(err, RESULT) {    
-		   if (err)
+		   /*if (err)
                         {
                         	 const response = {message:"failed", result: "Failed to insert Video_Media"};
                               res.send(JSON.stringify(response));
 
                         }
                         else
-                        {
+                        {*//
                              const response = {message:"success", result: RESULT};
 				             res.send(JSON.stringify(response));
-                        }
+                        //}
         });
 });
+
+app.post('/get/video/data', (req, res)=>{
+	// make query to video link
+	console.log(req.body);
+	const query = `SELECT * FROM Video_Media WHERE Video_Id = "${req.body.Video_Id}"`;
+            conn.SubmitQuery(query, function(err, RESULT) {
+		   /*if (err)
+                        {
+                        	 const response = {message:"failed", result: "Failed to insert Video_Media"};
+                              res.send(JSON.stringify(response));
+
+                        }
+                        else
+                        {*/
+                             const response = {message:"success", result: RESULT};
+				             res.send(JSON.stringify(response));
+                        //}
+        });
+});
+
+app.post('/get/all/video/data/', (req, res)=>{
+	// make query to video link
+	console.log(req.body);
+	const query = `SELECT * FROM Video_Media WHERE User_Id = "${req.body.User_Id}"`;
+            conn.SubmitQuery(query, function(err, RESULT) {
+		   /*if (err)
+                        {
+                        	 const response = {message:"failed", result: "Failed to insert Video_Media"};
+                              res.send(JSON.stringify(response));
+
+                        }
+                        else
+                        {*/
+                             const response = {message:"success", result: RESULT};
+				             res.send(JSON.stringify(response));
+                        //}
+        });
+});
+
 
 app.post('/user/upload/photo', (req, res)=>{
         // make query to video link
