@@ -103,7 +103,7 @@ app.post('/get/video/data', (req, res)=>{
 	// make query to video link
 	console.log(req.body);
 	const query = `SELECT * FROM Video_Media WHERE Video_Id = "${req.body.Video_Id}"`;
-            conn.SubmitQuery(query, function(err, RESULT) {
+            conn.SubmitQuery(query, function(RESULT) {
 		   if (RESULT)
               {
                      const response = {message:"success", result: RESULT};
@@ -122,7 +122,7 @@ app.post('/get/all/video/data/', (req, res)=>{
 	// make query to video link
 	console.log(req.body);
 	const query = `SELECT * FROM Video_Media WHERE User_Id = "${req.body.User_Id}"`;
-            conn.SubmitQuery(query, function(err, RESULT) {
+            conn.SubmitQuery(query, function(RESULT) {
 		    if (RESULT)
               {
                      const response = {message:"success", result: RESULT};
@@ -157,6 +157,83 @@ app.post('/user/upload/photo', (req, res)=>{
 });
 
 
+
+
+app.post('/user/like/video', (req, res)=>{
+        // make query to video link
+        console.log(req.body);
+        const query = `INSERT INTO Video_Like (Video_Id, User_Id) VALUES ("${req.body.Video_Id}", "${req.body.User_Id}")`;
+            conn.SubmitQuery(query, function(RESULT) {
+                   if (RESULT)
+              {
+                     const response = {message:"success", result: RESULT};
+                      res.send(JSON.stringify(response));
+
+                }
+                else
+                {
+                     const response = {message:"failed", result: RESULT};
+                     res.send(JSON.stringify(response));
+                }
+        });
+});
+
+app.post('/user/comment/video', (req, res)=>{
+        // make query to video link
+        console.log(req.body);
+        const query = `INSERT INTO Video_Comment (Comment, Video_Id, User_Id) VALUES (“cool video", "${req.body.Video_Id}", "${req.body.User_Id}")`;
+            conn.SubmitQuery(query, function(RESULT) {
+                if (RESULT)
+                {
+                     const response = {message:"success", result: RESULT};
+                      res.send(JSON.stringify(response));
+
+                }
+                else
+                {
+                     const response = {message:"failed", result: RESULT};
+                     res.send(JSON.stringify(response));
+                }
+        });
+});
+
+app.post('/user/video/likes', (req, res)=>{
+        // make query to video link
+        console.log(req.body);
+        const query = `SELECT Video_Like.User_Id, Users.Username FROM Users INNER JOIN Video_Like ON Users.User_Id = Video_Like.User_Id WHERE Video_Like.Video_Id = "${req.body.Video_Id}"`;
+            conn.SubmitQuery(query, function(RESULT) {
+              if (RESULT)
+              {
+                     const response = {message:"success", result: RESULT};
+                      res.send(JSON.stringify(response));
+
+                }
+                else
+                {
+                     const response = {message:"failed", result: RESULT};
+                     res.send(JSON.stringify(response));
+                }
+        });
+});
+
+app.post('/user/video/comments', (req, res)=>{
+        // make query to video link
+        console.log(req.body);
+        const query = `SELECT Video_Comment.User_Id, Users.Username, Video_Comment.Comment FROM Users INNER JOIN Video_Comment ON Users.User_Id = Video_Comment.User_Id WHERE Video_Comment.Video_Id = "${req.body.Video_Id}"`;
+            conn.SubmitQuery(query, function(RESULT) {
+              if (RESULT)
+              {
+                     const response = {message:"success", result: RESULT};
+                      res.send(JSON.stringify(response));
+
+                }
+                else
+                {
+                     const response = {message:"failed", result: RESULT};
+                     res.send(JSON.stringify(response));
+                }
+        });
+});
 
 app.listen(process.env.PORT, ()=> console.log(`Example app listening on port ${process.env.PORT}!`));
 
