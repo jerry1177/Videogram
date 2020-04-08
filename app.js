@@ -235,5 +235,44 @@ app.post('/user/video/comments', (req, res)=>{
         });
 });
 
+app.post('/user/delete/video', (req, res)=>{
+        // make query to video link
+        console.log(req.body);
+        const query = `DELETE FROM Video_Media WHERE Video_Id = “${req.body.Video_Id}”`;
+            conn.SubmitQuery(query, function(RESULT) {
+              if (RESULT)
+              {
+                     const response = {message:"success", result: RESULT};
+                      res.send(JSON.stringify(response));
+
+                }
+                else
+                {
+                     const response = {message:"failed", result: RESULT};
+                     res.send(JSON.stringify(response));
+                }
+        });
+});
+
+app.get('/find/users', (req, res)=>{
+        // make query to video link
+        console.log(req.body);
+        const query = `SELECT User_Id, Username FROM Users`;
+            conn.SubmitQuery(query, function(RESULT) {
+              if (RESULT)
+              {
+                     const response = {message:"success", result: RESULT};
+                      res.send(JSON.stringify(response));
+
+                }
+                else
+                {
+                     const response = {message:"failed", result: RESULT};
+                     res.send(JSON.stringify(response));
+                }
+        });
+});
+
+
 app.listen(process.env.PORT, ()=> console.log(`Example app listening on port ${process.env.PORT}!`));
 
