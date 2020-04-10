@@ -46,7 +46,7 @@ app.post('/user/signup', (req, res)=>{
 	const query = `INSERT INTO Users (Username, Password, Firstname, Lastname, Email) VALUES ("${req.body.Username}", "${req.body.Password}", "${req.body.Firstname}", "${req.body.Lastname}", "${req.body.Email}")`;
 	conn.SubmitQuery(query, function(RESULT) {
         if (RESULT) {
-            const response = {message:"success", result: RESULT, userId: RESULT.insertId};
+            const response = {message:"success", result: RESULT, User_Id: RESULT.insertId};
             res.send(JSON.stringify(response));
         }
         else
