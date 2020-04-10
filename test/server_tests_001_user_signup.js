@@ -64,7 +64,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-4 //
 var TEST_CASE_NO = "TC-4"
-var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user signup request and responds with the correct output when no inputs are defined.."
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user signup request and responds with the correct output when no inputs are defined."
 var Inputs =
     {
     }

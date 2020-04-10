@@ -45,13 +45,13 @@ app.post('/query', (req, res)=>{
 app.post('/user/signup', (req, res)=>{
 	if (!req.body.Username || !req.body.Password || !req.body.Firstname || !req.body.Lastname || !req.body.Email)
 	{
-	    const response = {message:"failed", result: "invalid information sent", User_Id: ""};
+	    const response = {message:"failed", result: "invalid request"};
         res.send(JSON.stringify(response));
         return;
 	}
 	if (req.body.Username == "" || req.body.Password == "" || req.body.Firstname == "" || req.body.Lastname == "" || req.body.Email == "")
 	{
-	    const response = {message:"failed", result: "invalid information sent", User_Id: ""};
+	    const response = {message:"failed", result: "invalid request"};
         res.send(JSON.stringify(response));
         return;
 	}
@@ -63,20 +63,26 @@ app.post('/user/signup', (req, res)=>{
         }
         else
         {
-            const response = {message:"failed", result: "invalid information sent", User_Id: ""};
+            const response = {message:"failed", result: "error inserting into database"};
             res.send(JSON.stringify(response));
         }
 	});	
 });
 
 app.post('/user/login', (req, res)=>{
-	    const query = `SELECT Password FROM Users WHERE Username = "${req.body.Username}"`;
+        if (!req.body.Username || req.body.Username == "")
+        {
+            const response = {message:"failed", result: "invalid request"};
+            res.send(JSON.stringify(response));
+            return;
+        }
+	    const query = `SELECT (User_Id, Password) FROM Users WHERE Username = "${req.body.Username}"`;
 	    conn.SubmitQuery(query, function(RESULT) {
 		    if (RESULT.length)
 			{
 				if (RESULT[0].Password == req.body.Password)
 				{
-		    			const response = {message:"success"};
+		    			const response = {message:"success", result: RESULT[0], User_Id: RESULT[0].User_Id};
 					    res.send(JSON.stringify(response));
 				}
 		    	else
@@ -85,7 +91,7 @@ app.post('/user/login', (req, res)=>{
 					res.send(JSON.stringify(response));
 				}
 			}
-		    	else
+		    else
 			{
 				const response = {message:"failed", result: "incorrect username"};
 				res.send(JSON.stringify(response));
@@ -152,7 +158,7 @@ app.post('/get/all/video/data/', (req, res)=>{
 });
 
 
-app.post('/user/upload/photo', (req, res)=>{
+app.post('/user/upload/profile/photo', (req, res)=>{
         // make query to video link
         console.log(req.body);
         const query = `INSERT INTO Photo_Media (Photo_Link) VALUES ("{req.body.Photo_Link}")`;
