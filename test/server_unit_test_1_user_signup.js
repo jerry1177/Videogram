@@ -6,20 +6,31 @@ chai.use(chaiHttp);
 /*
 * Test the / route
 */
+var TEST_CASE_NO = "UTC-1"
+var TEST_CASE_DESC = "Purpose: This unit test case verifies that the back end server application handles a user signup request and responds with correct format."
+var Inputs =
+    {
+        Username: "Test_User",
+        Password: "test_password",
+        Firstname: "Test",
+        Lastname: "Test",
+        Email: "testuser@test.com"
+    }
 var Route = "/user/signup"
-describe(Route, () => {
-  it('/user/signup endpoint should return something', (done) => {
-      let Req = {
+var Url = "http://54.193.77.192:3000"
+describe(TEST_CASE_NO, () => {
+  it(TEST_CASE_DESC, (done) => {
+      /*let Req = {
             Username: "Test_User",
             Password: "test_password",
             Firstname: "Test",
             Lastname: "Test",
             Email: "testuser@test.com"
-      }
-    chai.request("http://54.193.77.192:3000")
+      }*/
+    chai.request(Url)
         .post(Route)
-        .set('Content-Type', 'application/json')
-        .send(Req)
+        //.set('Content-Type', 'application/json')
+        .send(Inputs)
         .end((err, res) => {
               var RESULT = JSON.parse(res.text)
               //res.should.have.status(200);
