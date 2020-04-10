@@ -43,6 +43,18 @@ app.post('/query', (req, res)=>{
 });
 
 app.post('/user/signup', (req, res)=>{
+	if (!req.body.Username || !req.body.Password || !req.body.Firstname || !req.body.Lastname || !req.body.Email)
+	{
+	    const response = {message:"failed", result: "invalid information sent", User_Id: ""};
+        res.send(JSON.stringify(response));
+        return;
+	}
+	if (req.body.Username == "" || req.body.Password == "" || req.body.Firstname == "" || req.body.Lastname == "" || req.body.Email == "")
+	{
+	    const response = {message:"failed", result: "invalid information sent", User_Id: ""};
+        res.send(JSON.stringify(response));
+        return;
+	}
 	const query = `INSERT INTO Users (Username, Password, Firstname, Lastname, Email) VALUES ("${req.body.Username}", "${req.body.Password}", "${req.body.Firstname}", "${req.body.Lastname}", "${req.body.Email}")`;
 	conn.SubmitQuery(query, function(RESULT) {
         if (RESULT) {
@@ -51,7 +63,7 @@ app.post('/user/signup', (req, res)=>{
         }
         else
         {
-            const response = {message:"error", result: "invalid information sent", User_Id: ""};
+            const response = {message:"failed", result: "invalid information sent", User_Id: ""};
             res.send(JSON.stringify(response));
         }
 	});	
