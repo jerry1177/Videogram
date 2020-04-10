@@ -39,7 +39,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-3 //
 var TEST_CASE_NO = "TC-3"
-var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user signup request and responds with the correct output when the inputs are empty."
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user signup request and responds with the correct output when the inputs are empty strings."
 var Inputs =
     {
         Username: "",
@@ -55,13 +55,29 @@ describe(TEST_CASE_NO, () => {
             .send(Inputs)
             .end((err, res) => {
                 var Response = JSON.parse(res.text)
-                Response["message"].should.equal('failure');
+                Response["message"].should.equal('failed');
                 done();
         });
     });
 });
 
 
-
-
+// TC-4 //
+var TEST_CASE_NO = "TC-4"
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user signup request and responds with the correct output when no inputs are defined.."
+var Inputs =
+    {
+    }
+describe(TEST_CASE_NO, () => {
+    it(TEST_CASE_DESC, (done) => {
+        chai.request(Url)
+            .post(Route)
+            .send(Inputs)
+            .end((err, res) => {
+                var Response = JSON.parse(res.text)
+                Response["message"].should.equal('failed');
+                done();
+        });
+    });
+});
 
