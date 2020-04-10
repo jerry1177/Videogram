@@ -76,7 +76,7 @@ app.post('/user/login', (req, res)=>{
             res.send(JSON.stringify(response));
             return;
         }
-	    const query = `SELECT User_Id, Password FROM Users WHERE Username = "${req.body.Username}"`;
+	    const query = `SELECT User_Id, Username, Password FROM Users WHERE Username = "${req.body.Username}"`;
 	    conn.SubmitQuery(query, function(RESULT) {
 		    if (RESULT.length)
 			{
