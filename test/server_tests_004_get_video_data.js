@@ -47,7 +47,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-16 //
 var TEST_CASE_NO = "TC-16"
-var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a get video data request and responds with the correct output when a user has entered successful video data."
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a get video data request and responds with the correct output when a user has entered a successful Video_Id."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =

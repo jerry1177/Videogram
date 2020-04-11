@@ -154,7 +154,7 @@ app.post('/get/video/data', (req, res)=>{
         });
 });
 
-app.post('/get/all/video/data/', (req, res)=>{
+app.post('/get/all/user/video/data/', (req, res)=>{
     if (!req.body.User_Id || req.body.User_Id == "")
     {
         const response = {message:"failed", result: "invalid request"};
