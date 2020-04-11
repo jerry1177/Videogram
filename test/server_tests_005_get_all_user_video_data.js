@@ -17,7 +17,7 @@ describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
         {
-            Video_Id: "68",
+            User_Id: "68",
         }
         chai.request(Url)
             .post(Route)
@@ -41,7 +41,7 @@ describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
         {
-            Video_Id: "68",
+            User_Id: "68",
         }
         chai.request(Url)
             .post(Route)

@@ -161,7 +161,7 @@ app.post('/get/all/user/video/data/', (req, res)=>{
         res.send(JSON.stringify(response));
         return;
     }	console.log(req.body);
-	const query = `SELECT * FROM Video_Media WHERE User_Id = "${req.body.User_Id}"`;
+	const query = `SELECT * FROM Video_Media WHERE User = "${req.body.User_Id}"`;
             conn.SubmitQuery(query, function(RESULT) {
 		    if (RESULT)
               {
