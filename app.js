@@ -101,19 +101,30 @@ app.post('/user/login', (req, res)=>{
 
 
 app.post('/user/upload/video', (req, res)=>{
-	// make query to video link
+	if (!req.body.Video_Link || !req.body.User_Id || !req.body.Upload_Date)
+    {
+        const response = {message:"failed", result: "invalid request"};
+        res.send(JSON.stringify(response));
+        return;
+    }
+    if (req.body.Video_Link == "" || req.body.User_Id == "" || req.body.Upload_Date == "")
+    {
+        const response = {message:"failed", result: "invalid request"};
+        res.send(JSON.stringify(response));
+        return;
+    }
 	console.log(req.body);
 	const query = `INSERT INTO Video_Media (Video_Link, User, Upload_Date, Active, Title, Description, Location, Length, Resolution, Fps, Format) VALUES ("${req.body.Video_Link}", "${req.body.User_Id}", "${req.body.Upload_Date}", "${req.body.Active}", "${req.body.Title}", "${req.body.Description}", "${req.body.Location}", "${req.body.Length}", "${req.body.Resolution}", "${req.body.Fps}", "${req.body.Format}")`;
             conn.SubmitQuery(query, function(RESULT) {
 		   if (RESULT)
               {
-                     const response = {message:"success", result: RESULT};
+                     const response = {message:"success", result: RESULT, Video_Id: RESULT.insertId};
                       res.send(JSON.stringify(response));
 
                 }
                 else
                 {
-                     const response = {message:"failed", result: RESULT};
+                     const response = {message:"failed", result: "error inserting into database"};
                      res.send(JSON.stringify(response));
                 }
         });

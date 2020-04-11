@@ -28,7 +28,7 @@ describe(TEST_CASE_NO, () => {
                 Response.should.have.property('message');
                 Response.should.have.property('result');
                 Response.should.have.property('User_Id');
-                console.log(Response)
+                //console.log(Response)
                 done();
         });
     });
@@ -51,7 +51,7 @@ describe(TEST_CASE_NO, () => {
                 var Response = JSON.parse(res.text)
                 Response["message"].should.equal('success');
                 Response["User_Id"].should.to.be.at.least(1);
-                console.log(Response)
+                //console.log(Response)
                 done();
         });
     });
@@ -59,7 +59,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-7 //
 var TEST_CASE_NO = "TC-7"
-var TEST_CASE_DESC = "Purpose:"
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user login request and responds with the correct output when a user has entered a successful username and an incorrect password."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -74,7 +74,7 @@ describe(TEST_CASE_NO, () => {
                 var Response = JSON.parse(res.text)
                 Response["message"].should.equal('failed');
                 Response["result"].should.equal('incorrect password');
-                console.log(Response)
+                //console.log(Response)
                 done();
         });
     });
@@ -83,7 +83,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-8 //
 var TEST_CASE_NO = "TC-8"
-var TEST_CASE_DESC = "Purpose:"
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user login request and responds with the correct output when a user has entered an incorrect username."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -98,7 +98,7 @@ describe(TEST_CASE_NO, () => {
                 var Response = JSON.parse(res.text)
                 Response["message"].should.equal('failed');
                 Response["result"].should.equal('incorrect username');
-                console.log(Response)
+                //console.log(Response)
                 done();
         });
     });
@@ -106,7 +106,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-9 //
 var TEST_CASE_NO = "TC-9"
-var TEST_CASE_DESC = "Purpose:"
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user login request and responds with the correct output when the inputs are empty strings."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -121,7 +121,7 @@ describe(TEST_CASE_NO, () => {
                 var Response = JSON.parse(res.text)
                 Response["message"].should.equal('failed');
                 Response["result"].should.equal('invalid request');
-                console.log(Response)
+                //console.log(Response)
                 done();
         });
     });
@@ -130,7 +130,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-10 //
 var TEST_CASE_NO = "TC-10"
-var TEST_CASE_DESC = "Purpose:"
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user signup request and responds with the correct output when no inputs are defined."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -143,7 +143,7 @@ describe(TEST_CASE_NO, () => {
                 var Response = JSON.parse(res.text)
                 Response["message"].should.equal('failed');
                 Response["result"].should.equal('invalid request');
-                console.log(Response)
+                //console.log(Response)
                 done();
         });
     });
