@@ -12,7 +12,7 @@ var Url = "http://54.193.77.192:3000"
 
 // TC-19 //
 var TEST_CASE_NO = "TC-19"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a get all user video data request and responds with the correct json format."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -36,7 +36,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-20 //
 var TEST_CASE_NO = "TC-20"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a get all user video data request and responds with the correct output when a user has entered a successful User_Id.."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -48,7 +48,7 @@ describe(TEST_CASE_NO, () => {
             .send(Inputs)
             .end((err, res) => {
                 var Response = JSON.parse(res.text)
-                console.log(Response);
+                //console.log(Response);
                 Response["message"].should.equal('success');
                 Response["result"].should.be.a('array');
                 for (var i = 0; i < Response["result"].length; i++) {
@@ -64,7 +64,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-21 //
 var TEST_CASE_NO = "TC-21"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a get all user video data request and responds with the correct output when the inputs are empty strings."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -87,7 +87,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-22 //
 var TEST_CASE_NO = "TC-22"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a get all user video data request and responds with the correct output when no inputs are defined."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
