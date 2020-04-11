@@ -130,7 +130,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-10 //
 var TEST_CASE_NO = "TC-10"
-var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user signup request and responds with the correct output when no inputs are defined."
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user login request and responds with the correct output when no inputs are defined."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =

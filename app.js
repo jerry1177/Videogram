@@ -131,7 +131,12 @@ app.post('/user/upload/video', (req, res)=>{
 });
 
 app.post('/get/video/data', (req, res)=>{
-	// make query to video link
+	if (!req.body.Video_Id || req.body.Video_Id == "")
+    {
+        const response = {message:"failed", result: "invalid request"};
+        res.send(JSON.stringify(response));
+        return;
+    }
 	console.log(req.body);
 	const query = `SELECT * FROM Video_Media WHERE Video_Id = "${req.body.Video_Id}"`;
             conn.SubmitQuery(query, function(RESULT) {
@@ -143,15 +148,19 @@ app.post('/get/video/data', (req, res)=>{
                 }
                 else
                 {
-                     const response = {message:"failed", result: RESULT};
+                     const response = {message:"failed", result: "error, could not retrieve from database"};
                      res.send(JSON.stringify(response));
                 }
         });
 });
 
 app.post('/get/all/video/data/', (req, res)=>{
-	// make query to video link
-	console.log(req.body);
+    if (!req.body.User_Id || req.body.User_Id == "")
+    {
+        const response = {message:"failed", result: "invalid request"};
+        res.send(JSON.stringify(response));
+        return;
+    }	console.log(req.body);
 	const query = `SELECT * FROM Video_Media WHERE User_Id = "${req.body.User_Id}"`;
             conn.SubmitQuery(query, function(RESULT) {
 		    if (RESULT)
@@ -162,7 +171,7 @@ app.post('/get/all/video/data/', (req, res)=>{
                 }
                 else
                 {
-                     const response = {message:"failed", result: RESULT};
+                     const response = {message:"failed", result: "error, could not retrieve from database"};
                      res.send(JSON.stringify(response));
                 }
         });
