@@ -142,7 +142,7 @@ app.post('/get/video/data', (req, res)=>{
             conn.SubmitQuery(query, function(RESULT) {
 		   if (RESULT)
               {
-                     const response = {message:"success", result: RESULT};
+                     const response = {message:"success", result: RESULT[0]};
                       res.send(JSON.stringify(response));
 
                 }

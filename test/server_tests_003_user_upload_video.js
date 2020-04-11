@@ -19,7 +19,7 @@ describe(TEST_CASE_NO, () => {
         {
             Video_Link: "test.com",
             User_Id: "68",
-            Upload_Date: "2020-05-01"
+            Upload_Date: "2020-05-01T01:01:01.000Z"
         }
         chai.request(Url)
             .post(Route)
@@ -45,7 +45,7 @@ describe(TEST_CASE_NO, () => {
         {
             Video_Link: "test.com",
             User_Id: "68",
-            Upload_Date: "2020-05-01"
+            Upload_Date: "2020-05-01T01:01:01.000Z"
         }
         chai.request(Url)
             .post(Route)
