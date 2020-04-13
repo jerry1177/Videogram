@@ -232,7 +232,7 @@ app.post('/user/comment/video', (req, res)=>{
             return;
         }
         console.log(req.body);
-        const query = `INSERT INTO Video_Comment (Comment, Video_Id, User_Id) VALUES (“cool video", "${req.body.Video_Id}", "${req.body.User_Id}")`;
+        const query = `INSERT INTO Video_Comment (Comment, Video_Id, User_Id) VALUES (“${req.body.Comment}", "${req.body.Video_Id}", "${req.body.User_Id}")`;
             conn.SubmitQuery(query, function(RESULT) {
                 if (RESULT)
                 {

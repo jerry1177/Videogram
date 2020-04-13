@@ -51,7 +51,6 @@ describe(TEST_CASE_NO, () => {
                 var Response = JSON.parse(res.text)
                 //console.log(Response);
                 Response["message"].should.equal('success');
-                Response["Like_Id"].should.be.a('integer');
                 Response["Like_Id"].should.to.be.at.least(1);
                 done();
         });
