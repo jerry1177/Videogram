@@ -42,7 +42,7 @@ describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
         {
-            Comment: "",
+            Comment: "test comment",
             Video_Id: "68",
             User_Id: "68"
         }

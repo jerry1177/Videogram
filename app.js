@@ -249,7 +249,12 @@ app.post('/user/comment/video', (req, res)=>{
 });
 
 app.post('/user/video/likes', (req, res)=>{
-        // make query to video link
+        if (!req.body.Video_Id || req.body.Video_Id == "")
+        {
+            const response = {message:"failed", result: "invalid request"};
+            res.send(JSON.stringify(response));
+            return;
+        }
         console.log(req.body);
         const query = `SELECT Video_Like.User_Id, Users.Username FROM Users INNER JOIN Video_Like ON Users.User_Id = Video_Like.User_Id WHERE Video_Like.Video_Id = "${req.body.Video_Id}"`;
             conn.SubmitQuery(query, function(RESULT) {
@@ -268,7 +273,12 @@ app.post('/user/video/likes', (req, res)=>{
 });
 
 app.post('/user/video/comments', (req, res)=>{
-        // make query to video link
+        if (!req.body.Video_Id || req.body.Video_Id == "")
+        {
+            const response = {message:"failed", result: "invalid request"};
+            res.send(JSON.stringify(response));
+            return;
+        }
         console.log(req.body);
         const query = `SELECT Video_Comment.User_Id, Users.Username, Video_Comment.Comment FROM Users INNER JOIN Video_Comment ON Users.User_Id = Video_Comment.User_Id WHERE Video_Comment.Video_Id = "${req.body.Video_Id}"`;
             conn.SubmitQuery(query, function(RESULT) {
