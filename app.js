@@ -212,7 +212,7 @@ app.post('/user/like/video', (req, res)=>{
             conn.SubmitQuery(query, function(RESULT) {
               if (RESULT)
               {
-                     const response = {message:"success", result: RESULT, Like_Id: RESULT[0].insertId};
+                     const response = {message:"success", result: RESULT, Like_Id: RESULT.insertId};
                       res.send(JSON.stringify(response));
 
                 }
@@ -236,7 +236,7 @@ app.post('/user/comment/video', (req, res)=>{
             conn.SubmitQuery(query, function(RESULT) {
                 if (RESULT)
                 {
-                     const response = {message:"success", result: RESULT, Comment_Id: RESULT[0].insertId};
+                     const response = {message:"success", result: RESULT, Comment_Id: RESULT.insertId};
                       res.send(JSON.stringify(response));
 
                 }
