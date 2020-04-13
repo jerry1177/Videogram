@@ -160,7 +160,8 @@ app.post('/get/all/user/video/data/', (req, res)=>{
         const response = {message:"failed", result: "invalid request"};
         res.send(JSON.stringify(response));
         return;
-    }	console.log(req.body);
+    }
+    console.log(req.body);
 	const query = `SELECT * FROM Video_Media WHERE User = "${req.body.User_Id}"`;
             conn.SubmitQuery(query, function(RESULT) {
 		    if (RESULT)
@@ -179,20 +180,20 @@ app.post('/get/all/user/video/data/', (req, res)=>{
 
 
 app.post('/user/upload/profile/photo', (req, res)=>{
-        // make query to video link
+
         console.log(req.body);
         const query = `INSERT INTO Photo_Media (Photo_Link) VALUES ("{req.body.Photo_Link}")`;
             conn.SubmitQuery(query, function(err, RESULT) {
                     if (err)
-                        {
-                               const response = {message:"failed", result: "Failed to insert Photo_Media"};
-                               res.send(JSON.stringify(response));
-                        }
-                        else
-                        {
-                             const response = {message:"success", result: RESULT};
-                             res.send(JSON.stringify(response));
-                        }
+                    {
+                           const response = {message:"failed", result: "Failed to insert Photo_Media"};
+                           res.send(JSON.stringify(response));
+                    }
+                    else
+                    {
+                         const response = {message:"success", result: RESULT};
+                         res.send(JSON.stringify(response));
+                    }
         });
 });
 
@@ -200,13 +201,18 @@ app.post('/user/upload/profile/photo', (req, res)=>{
 
 
 app.post('/user/like/video', (req, res)=>{
-        // make query to video link
+        if (!req.body.Video_Id || req.body.Video_Id == "" || !req.body.User_Id || req.body.User_Id == "")
+        {
+            const response = {message:"failed", result: "invalid request"};
+            res.send(JSON.stringify(response));
+            return;
+        }
         console.log(req.body);
         const query = `INSERT INTO Video_Like (Video_Id, User_Id) VALUES ("${req.body.Video_Id}", "${req.body.User_Id}")`;
             conn.SubmitQuery(query, function(RESULT) {
-                   if (RESULT)
+              if (RESULT)
               {
-                     const response = {message:"success", result: RESULT};
+                     const response = {message:"success", result: RESULT, Like_Id: RESULT[0].insertId};
                       res.send(JSON.stringify(response));
 
                 }
@@ -219,13 +225,18 @@ app.post('/user/like/video', (req, res)=>{
 });
 
 app.post('/user/comment/video', (req, res)=>{
-        // make query to video link
+        if (!req.body.Comment || req.body.Comment == "" || !req.body.Video_Id || req.body.Video_Id == "" || !req.body.User_Id || req.body.User_Id == "")
+        {
+            const response = {message:"failed", result: "invalid request"};
+            res.send(JSON.stringify(response));
+            return;
+        }
         console.log(req.body);
         const query = `INSERT INTO Video_Comment (Comment, Video_Id, User_Id) VALUES (“cool video", "${req.body.Video_Id}", "${req.body.User_Id}")`;
             conn.SubmitQuery(query, function(RESULT) {
                 if (RESULT)
                 {
-                     const response = {message:"success", result: RESULT};
+                     const response = {message:"success", result: RESULT, Comment_Id: RESULT[0].insertId};
                       res.send(JSON.stringify(response));
 
                 }
