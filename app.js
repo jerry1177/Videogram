@@ -297,7 +297,12 @@ app.post('/user/video/comments', (req, res)=>{
 });
 
 app.post('/user/delete/video', (req, res)=>{
-        // make query to video link
+        if (!req.body.Video_Id || req.body.Video_Id == "")
+        {
+            const response = {message:"failed", result: "invalid request"};
+            res.send(JSON.stringify(response));
+            return;
+        }
         console.log(req.body);
         const query = `DELETE FROM Video_Media WHERE Video_Id = “${req.body.Video_Id}”`;
             conn.SubmitQuery(query, function(RESULT) {
@@ -316,7 +321,6 @@ app.post('/user/delete/video', (req, res)=>{
 });
 
 app.get('/find/users', (req, res)=>{
-        // make query to video link
         console.log(req.body);
         const query = `SELECT User_Id, Username FROM Users`;
             conn.SubmitQuery(query, function(RESULT) {
