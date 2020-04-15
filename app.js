@@ -55,18 +55,29 @@ app.post('/user/signup', (req, res)=>{
         res.send(JSON.stringify(response));
         return;
 	}
-	const query = `INSERT INTO Users (Username, Password, Firstname, Lastname, Email) VALUES ("${req.body.Username}", "${req.body.Password}", "${req.body.Firstname}", "${req.body.Lastname}", "${req.body.Email}")`;
-	conn.SubmitQuery(query, function(RESULT) {
-        if (RESULT) {
-            const response = {message:"success", result: RESULT, User_Id: RESULT.insertId};
+	const checkQuery = `SELECT * FROM Users WHERE Username = "${req.body.Username}"`;
+	conn.SubmitQuery(checkQuery, function(RESPONSE) {
+	    if (!RESPONSE.length) {
+	        const query = `INSERT INTO Users (Username, Password, Firstname, Lastname, Email) VALUES ("${req.body.Username}", "${req.body.Password}", "${req.body.Firstname}", "${req.body.Lastname}", "${req.body.Email}")`;
+	        conn.SubmitQuery(query, function(RESULT) {
+            if (RESULT) {
+                const response = {message:"success", result: RESULT, User_Id: RESULT.insertId};
+                res.send(JSON.stringify(response));
+            }
+            else
+            {
+                const response = {message:"failed", result: "error inserting into database"};
+                res.send(JSON.stringify(response));
+            }
+            });
+	    }
+	    else
+	    {
+	        const response = {message:"failed", result: "username taken"};
             res.send(JSON.stringify(response));
-        }
-        else
-        {
-            const response = {message:"failed", result: "error inserting into database"};
-            res.send(JSON.stringify(response));
-        }
-	});	
+	    }
+	})
+
 });
 
 app.post('/user/login', (req, res)=>{
@@ -304,7 +315,7 @@ app.post('/user/delete/video', (req, res)=>{
             return;
         }
         console.log(req.body);
-        const query = `DELETE FROM Video_Media WHERE Video_Id = “${req.body.Video_Id}”`;
+        const query = `DELETE FROM Video_Media WHERE Video_Id = "${req.body.Video_Id}"`;
             conn.SubmitQuery(query, function(RESULT) {
               if (RESULT)
               {
