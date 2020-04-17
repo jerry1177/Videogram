@@ -350,5 +350,11 @@ app.get('/find/users', (req, res)=>{
 });
 
 
+app.post('/test/file/upload', (req.res)=>{
+	console.log(req.body.file);
+
+});
+
+
 app.listen(process.env.PORT, ()=> console.log(`Example app listening on port ${process.env.PORT}!`));
 
