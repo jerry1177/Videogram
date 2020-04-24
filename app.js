@@ -7,6 +7,7 @@ const mysql = require('mysql');
 const fs = require('fs');
 const AWS = require('aws-sdk');
 
+
 const s3 = new AWS.S3({
 	accessKeyId: process.env.S3_ACCESS_KEY_ID,
 	secretAccessKey: process.env.S3_SECRET_ACCESS_KEY
@@ -282,6 +283,35 @@ app.post('/user/video/likes', (req, res)=>{
                 }
         });
 });
+
+
+
+
+app.post('/likes/for/user', (req, res)=>{
+        if (!req.body.User_Id || req.body.User_Id == "")
+        {
+            const response = {message:"failed", result: "invalid request"};
+            res.send(JSON.stringify(response));
+            return;
+        }
+        console.log(req.body);
+        const query = `SELECT DISTINCT Video_Id, User_Id FROM Video_Like WHERE User_Id = "${req.body.User_Id}"`;
+            conn.SubmitQuery(query, function(RESULT) {
+              if (RESULT)
+              {
+                     const response = {message:"success", result: RESULT};
+                      res.send(JSON.stringify(response));
+
+                }
+                else
+                {
+                     const response = {message:"failed", result: RESULT};
+                     res.send(JSON.stringify(response));
+                }
+        });
+});
+
+
 
 app.post('/user/video/comments', (req, res)=>{
         if (!req.body.Video_Id || req.body.Video_Id == "")
