@@ -12,7 +12,7 @@ var Url = "http://54.193.77.192:3000"
 
 // TC-31 //
 var TEST_CASE_NO = "TC-31"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user video likes request and responds with the correct json format."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -35,7 +35,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-32 //
 var TEST_CASE_NO = "TC-32"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user video likes request and responds with the correct output when a user has entered a successful Video_Id."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -58,7 +58,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-33 //
 var TEST_CASE_NO = "TC-33"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user video likes request and responds with the correct output when the inputs are empty strings."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -81,7 +81,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-34 //
 var TEST_CASE_NO = "TC-34"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user video likes request and responds with the correct output when no inputs are defined."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =

@@ -13,7 +13,7 @@ var Url = "http://54.193.77.192:3000"
 
 // TC-43 //
 var TEST_CASE_NO = "TC-43"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a find users request and responds with the correct json format."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         chai.request(Url)
@@ -31,7 +31,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-44 //
 var TEST_CASE_NO = "TC-44"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a find users request and responds with the correct output."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         chai.request(Url)

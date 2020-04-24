@@ -12,7 +12,7 @@ var Url = "http://54.193.77.192:3000"
 
 // TC-27 //
 var TEST_CASE_NO = "TC-27"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user comment video request and responds with the correct json format."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -37,7 +37,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-28 //
 var TEST_CASE_NO = "TC-28"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user comment video request and responds with the correct output when a user has entered a successful Comment, Video_Id and User_Id."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -62,7 +62,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-29 //
 var TEST_CASE_NO = "TC-29"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user comment video request and responds with the correct output when the inputs are empty strings."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
@@ -87,7 +87,7 @@ describe(TEST_CASE_NO, () => {
 
 // TC-30 //
 var TEST_CASE_NO = "TC-30"
-var TEST_CASE_DESC = "Purpose: "
+var TEST_CASE_DESC = "Purpose: This test case verifies that the back end server application handles a user comment video request and responds with the correct output when no inputs are defined."
 describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =

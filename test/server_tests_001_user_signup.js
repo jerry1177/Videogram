@@ -17,7 +17,7 @@ describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
         {
-            Username: "Test_User",
+            Username: "Test_User5",
             Password: "test_password",
             Firstname: "Test",
             Lastname: "Test",
@@ -43,7 +43,7 @@ describe(TEST_CASE_NO, () => {
     it(TEST_CASE_DESC, (done) => {
         var Inputs =
         {
-            Username: "Test_User",
+            Username: "Test_User6",
             Password: "test_password",
             Firstname: "Test",
             Lastname: "Test",
